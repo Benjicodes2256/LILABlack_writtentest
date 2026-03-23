@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { EventData, EVENT_COLORS } from "@/lib/types";
 
 interface Props {
@@ -34,9 +34,13 @@ export default function MapCanvas({
   const offsetRef = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState(false);
 
   // Load minimap image
   useEffect(() => {
+    setMapLoaded(false);
+    setMapError(false);
     const img = new Image();
     img.src = mapImage;
     img.onload = () => {
@@ -52,7 +56,11 @@ export default function MapCanvas({
           y: (ch - mapSize) / 2,
         };
       }
-      draw();
+      setMapLoaded(true);
+    };
+    img.onerror = () => {
+      console.error("Failed to load map image:", mapImage);
+      setMapError(true);
     };
   }, [mapImage]);
 
@@ -249,7 +257,7 @@ export default function MapCanvas({
 
   // Redraw on state change
   useEffect(() => {
-    draw();
+    if (mapLoaded && !mapError) draw();
   });
 
   // Mouse handlers for pan/zoom
@@ -330,6 +338,23 @@ export default function MapCanvas({
 
   return (
     <div ref={containerRef} className="w-full h-full bg-[#0a0e17] relative">
+      {!mapLoaded && !mapError && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#0a0e17]/80 backdrop-blur-sm">
+          <div className="w-10 h-10 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mb-4" />
+          <p className="text-gray-300 font-medium">Downloading HQ Map Image...</p>
+        </div>
+      )}
+      {mapError && (
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#0a0e17]/80 backdrop-blur-sm">
+          <div className="text-red-500 mb-2">
+            <svg className="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p className="text-red-400 font-medium">Failed to load map image</p>
+          <p className="text-xs text-gray-400 mt-1">{mapImage}</p>
+        </div>
+      )}
       <canvas
         ref={canvasRef}
         className="w-full h-full cursor-grab active:cursor-grabbing"
