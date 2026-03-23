@@ -1,0 +1,4 @@
+[build]
+  base = "lila-telemetry"
+  command = "npm run build"
+  publish = "out"
