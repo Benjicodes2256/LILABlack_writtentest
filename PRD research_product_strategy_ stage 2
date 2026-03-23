@@ -1,0 +1,63 @@
+# LILA Games Telemetry Visualizer: Product Strategy
+
+Refining the core mission and user focus for the tool.
+
+---
+
+## Step 1: Goal Setting (Linking Pain to Impact)
+
+| Element | Description |
+|---------|-------------|
+| **User Problem** | Level Designers cannot visually correlate player movement with combat and environmental events (storm) using raw telemetry. |
+| **User Behavior** | Designers rely on "gut feel" or spend hours manually parsing spreadsheets, leading to slow and potentially flawed map iterations. |
+| **Business Impact**| Suboptimal map balance leads to player frustration and churn. |
+| **Chosen Metric** | **Retention** (specifically long-term player engagement with maps). |
+
+**Goal Statement**: 
+*"Solve the difficulty of visualizing spatial-temporal player behavior to improve **Retention** for **Level Designers**."*
+
+---
+
+## Step 2: Persona (Arjun, The Map-Maker)
+
+### Identity Snapshot
+- **Name**: Arjun
+- **Tagline**: "The Spatial Storyteller"
+- **Role**: Lead Level Designer at LILA Games
+- **Location**: Bangalore, India
+
+### Goals / Motivations
+- To create balanced, "sticky" maps where every area feels intentional.
+- To use data to justify design changes to stakeholders (Studio Head/Prod).
+- To minimize "dead zones" where players never go.
+
+### Behaviours
+- Lives in Unity/Maya for 8 hours a day.
+- Reviews "Top 10 Kill Zones" spreadsheets weekly.
+- Iterates fast but hates manual data entry/parsing.
+
+### Frustrations (Pain Points)
+- *"I have 89,000 rows of data but I can't see where the 'Grand Rift' bottleneck is."*
+- *"I don't know if players are dying to the storm because it's too fast or because the map geometry is confusing."*
+- *"Tools are either too complex (Tableau) or non-existent for my specific maps."*
+
+### Quote
+> *"Give me a map, not a spreadsheet. I design in 3D, I should see the data in 2D so I can fix the 3D!"*
+
+---
+
+## Step 3: Problem Prioritization (Choosing P0)
+
+| Problem Hypothesis | Population | Intensity | Frequency | Total/Score |
+|--------------------|------------|-----------|-----------|-------------|
+| **P0: Spaghetti Noise & Lack of Context** | 100% | High | High | **Winner** |
+| **P1: Sharing/Collaboration friction** | 60% | Medium | Low | Low |
+| **P2: Bot vs Human misidentification** | 40% | High | Medium | Medium|
+
+### Strategic Filters (P0)
+- **Business Alignment**: Directly affects iteration speed -> Retention.
+- **Product Strength**: Web-based Canvas is ideal for high-density spatial viz.
+- **Scope**: Highly solvable with the provided parquet data and mapping formula.
+
+### Final P0 Problem Statement
+> **"Level Designers at LILA Games struggle to identify actionable map insights (bottlenecks, dead zones) because raw coordinate data is visually overwhelming and lacks temporal context, leading to suboptimal map balance and lower player retention."**

@@ -1,0 +1,57 @@
+# LILA Games Telemetry Visualizer: Solution Ideation
+
+Phase 3: Divergent thinking and strategic prioritization to solve the P0 "Spaghetti Noise" problem.
+
+---
+
+## Step 1: Brainstorming (Divergence)
+
+### How Might We (HMW) Questions
+- **HMW** help designers see "dead air" without being distracted by high-traffic noise?
+- **HMW** visualize the "tension" between the storm's movement and player survival?
+- **HMW** provide "one-click insights" so designers don't have to scan thousands of raw paths?
+
+### Analogy Thinking (Learning from other domains)
+- **Google Maps Traffic**: Use color gradients (Red/Yellow/Green) to show "Time Spent" in a zone, not just position counts.
+- **Video Editing Timelines**: Keyframe-style markers for combat events (Kills/Deaths) on the playback slider.
+- **Strava Global Heatmaps**: Aggregated "Global View" vs. "Single Session View".
+
+### Solution Categorization
+
+| Idea | Category | Assumption for Success |
+|------|----------|------------------------|
+| **1. Unified Temporal Heatmap** | High Confidence | Designers prioritize density trends over individual raw paths. |
+| **2. "Death Replay" Event Log** | High Confidence | Jumping to the "moment of friction" saves more time than manual scrubbing. |
+| **3. Bot vs Human Overlay** | High Confidence | Distinguishing AI noise is critical for map "feel" vs map "balance". |
+| **4. Macro-Metadata Filters** | Low Confidence | We have enough metadata (e.g., date, match duration) to provide useful facets. |
+| **5. Predicted Pathing (Moonshot)**| Moonshot | We can predict "most likely path" between two map points based on history. |
+
+---
+
+## Step 2: Prioritization (Convergence)
+
+### Impact vs. Effort Matrix
+
+- **High Impact / Low Effort (Quick Wins)**:
+  - **Dynamic Heatmap**: Solves "Spaghetti Noise".
+  - **Temporal Scrubbing**: Solves "Lack of Context".
+  - **Bot/Human Filtering**: Vital for P0 validation.
+- **High Impact / High Effort (Strategic Bets)**:
+  - **Multi-Match Aggregation**: Harder performance-wise but provides "Big Picture" data.
+  - **Death-Cluster Detection**: Algorithmic detection of "Meat Grinders".
+
+### Final Shortlist (Top 3 Solutions)
+
+1.  **The "Temporal Heatmap" Dashboard**: A heatmap that evolves as the user scrubs the timeline. This shows not just *where* people go, but *when* density shifts (e.g., the "Storm Squeeze" effect).
+2.  **Interactive "Moment-to-Moment" Log**: A clickable sidebar of combat events. Clicking a "Storm Death" instantly jumps the map and timeline to that event, providing immediate context.
+3.  **The "Ghost Path" Filter**: Visual feature that thins out individual movement lines while highlighting "aggregate lanes" - helping designers see transitions vs. camping spots.
+
+---
+
+## Step 3: User Flow (Ideal State)
+
+1.  **Trigger**: Arjun (Level Designer) sees a "High Churn" alert for Grand Rift Map.
+2.  **Action**: Opens Tool -> Selects **February 12** -> Filters for **Matches with >5 Storm Deaths**.
+3.  **Visualization**: The tool highlights a "Storm Squeeze" bottleneck in real-time as he play-backs the match. 
+4.  **Insight**: Arjun realizes the exit at Sector B is too narrow for 20 players.
+5.  **Outcome**: He opens Unity, widens the gate, and improves retention in the next patch.

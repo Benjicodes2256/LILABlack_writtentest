@@ -1,0 +1,57 @@
+# LILA Games Telemetry Visualizer: PRD Research
+
+Pre-development research and discovery for the Level Design Tool.
+
+## Step 1: Product Walkthrough (Conceptual)
+
+| Flows / Touchpoints | What works well | Confusion / Friction |
+|---------------------|-----------------|----------------------|
+| **Match Discovery** | Selecting a map gives immediate spatial context. | Finding a "representative" match in thousands of files is hard without metadata (e.g., "High-Kill matches"). |
+| **Hotspot Analysis**| Heatmaps instantly reveal high-traffic "meat grinders". | Overlapping paths/points can obscure specific details of a single engagement. |
+| **Temporal Analysis**| Timeline playback shows the "story" of the match. | Navigating to specific events (e.g., "the moment the Boss died") is difficult without a log. |
+
+---
+
+## Step 2: Company Context (LILA Games)
+
+- **Mission**: To build ambitious F2P mobile shooter games (like LILA BLACK) and unlock human potential through a culture of excellence and accountability.
+- **Revenue Streams**: Primarily F2P (In-App Purchases, Skins, Battle Pass, LiveOps).
+- **User Value (JTBD)**: "Help me visualize player behavior so I can build better maps without being a data scientist."
+- **Business Value**: Data-driven design iterations improve player retention and LTV.
+
+### Key Differentiators vs Top-3 Competitors
+
+| Competitor | Positioning | How LILA Tool Differs |
+|------------|-------------|-----------------------|
+| **In-Engine Tools** | Unreal/Unity built-in telemetry buffers. | Web-based, zero-install, and specialized for 2D spatial analysis for non-engineers. |
+| **BI Tools** | Tableau / PowerBI for data visualization. | Spatial-first mapping that aligns perfectly with in-game coordinates. |
+| **Manual Logs** | Grepping raw server logs. | High-fidelity, visual, and interactive playback vs static text. |
+
+---
+
+## Step 3: Feature Reverse-Engineering
+
+| Feature | Problem it Solves | How it works | Why it works (Behavior -> Result) |
+|---------|-------------------|--------------|-----------------------------------|
+| **Timeline Playback** | "I want to see *how* the fight unfolded, not just where it ended." | - Synchronizes all players by `ts`.<br>- Adjustable speed (1x-5x).<br>- Progress slider. | **User**: Understands player intent/pacing.<br>**Business**: Identifies churn-inducing map frustration. |
+| **Heatmap Overlay** | "I can't tell which areas are busy across hundreds of matches." | - Aggregates densities into a grid.<br>- Color-coded intensity.<br>- Toggleable layer. | **User**: Pinpoints macro-level map issues.<br>**Business**: Faster balancing = more stable meta. |
+| **Bot vs Human Toggle** | "I don't know if this path is weird because of a human or a bot bug." | - Color-coded paths.<br>- Filtering by `user_id` format. | **User**: Debugs AI navigation or human flow.<br>**Business**: Improves "believability" of Entity AI. |
+
+---
+
+## Step 4: User Segmentation
+
+| Primary Segment | Sub-segments | Key Needs / Use Cases | User Problems |
+|-----------------|--------------|-----------------------|---------------|
+| **Level Designers** | - Balance Specialists<br>- Content Creators<br>- LiveOps Tuning | - Coordinate mapping.<br>- Visualizing loot distribution.<br>- Analyzing storm deaths. | **Hypothesis**: Designers find it hard to see "Dead Zones" because paths overlap noise. |
+| **AI Engineers** | - Bot Logic Devs<br>- QA Testers | - Bot pathing visualization.<br>- Behavior comparison vs humans. | **Hypothesis**: Engineers can't tell if a bot is "stuck" without seeing the 3D -> 2D mapping. |
+
+---
+
+## Step 5: Top Problem Hypotheses
+
+| Priority | Problem Hypothesis | Why I Picked It | Confidence |
+|----------|--------------------|-----------------|------------|
+| **P1** | Level Designers struggle to identify **"Dead Zones"** (ignored areas) because movement paths overlap heavily, making low-traffic areas indistinguishable from high-traffic ones. | Observed "spaghetti" effect in raw coordinate plots. | High |
+| **P2** | Designers struggle to correlate **"Storm Pressure"** with player deaths because they can't easily see the storm's temporal movement relative to player positions. | Event data is point-in-time; needs temporal playback to understand "why". | High |
+| **P3** | Stakeholders struggle to **"Share Insights"** because they have no way to link a specific match/event to a teammate. | Critical for collaborative map-making. | Medium |
